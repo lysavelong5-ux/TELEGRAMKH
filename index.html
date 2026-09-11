@@ -33,7 +33,7 @@
         }
         .header-box {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
         }
         .header-title {
             font-size: 20px;
@@ -49,8 +49,30 @@
             color: #94a3b8;
             margin-top: 4px;
         }
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            background: rgba(15, 23, 42, 0.4);
+            border-radius: 8px;
+            padding: 6px 0;
+            margin-bottom: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .marquee-text {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 16s linear infinite;
+            font-size: 11px;
+            font-weight: 600;
+            color: #38bdf8;
+        }
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
         .input-group {
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
         .input-group label {
             font-size: 10px;
@@ -100,49 +122,73 @@
             font-size: 12px;
             font-weight: 700;
             color: #cbd5e1;
-            margin: 18px 0 10px 0;
+            margin: 14px 0 8px 0;
             display: flex;
             align-items: center;
             gap: 6px;
         }
-        .btn-grid {
+        .main-tabs {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
+            margin-bottom: 14px;
         }
-        .shop-btn {
+        .tab-btn {
             background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 14px;
-            padding: 14px 8px;
-            font-size: 12px;
+            border-radius: 12px;
+            padding: 10px;
+            font-size: 11px;
             font-weight: 700;
             color: #ffffff;
             cursor: pointer;
+            text-align: center;
             transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
-        .shop-btn:hover {
-            transform: translateY(-2px);
-            border-color: rgba(96, 165, 250, 0.5);
-            box-shadow: 0 6px 15px rgba(59, 130, 246, 0.3);
-        }
-        .shop-btn.active {
+        .tab-btn.active {
             background: linear-gradient(135deg, #2563eb, #7c3aed);
             border-color: #60a5fa;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+        }
+        .stars-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            max-height: 180px;
+            overflow-y: auto;
+            padding-right: 2px;
+        }
+        .star-item {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 8px 4px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .star-item:hover, .star-item.selected {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+        }
+        .star-count {
+            font-size: 11px;
+            font-weight: 700;
+            color: #f8fafc;
+        }
+        .star-price {
+            font-size: 10px;
+            color: #38bdf8;
+            margin-top: 2px;
+            font-weight: 600;
         }
         .footer {
-            margin-top: 24px;
+            margin-top: 18px;
             font-size: 10px;
             color: #64748b;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
-            padding-top: 12px;
+            padding-top: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -162,6 +208,12 @@
             <div class="header-sub">Longzz smm digital service</div>
         </div>
 
+        <div class="marquee-container">
+            <div class="marquee-text">
+                ⚠️ សូមមេត្ដាដាក់ Username របស់អ្នកឱ្យបានត្រឹមត្រូវ . បន្ទាប់ពីបញ្ជាទិញជោគជ័យសូមមេត្ដារងចាំចាប់ពី ៥នាទីដល់១៥នាទី ⏳
+            </div>
+        </div>
+
         <div class="input-group">
             <label>Telegram Username</label>
             <div class="input-box">
@@ -172,13 +224,41 @@
 
         <div class="section-title">⚙️ PREMIUM SERVICE SHOP</div>
         
-        <div class="btn-grid">
-            <button class="shop-btn" onclick="selectService(this)">
-                <span>TELEGRAM STAR</span> 🌟
-            </button>
-            <button class="shop-btn active" onclick="selectService(this)">
-                <span>TELEGRAM PREMIUM</span> 🦁
-            </button>
+        <div class="main-tabs">
+            <div class="tab-btn active" onclick="switchTab('stars')">TELEGRAM STAR 🌟</div>
+            <div class="tab-btn" onclick="switchTab('premium')">TELEGRAM PREMIUM 🦁</div>
+        </div>
+
+        <!-- បញ្ជីតម្លៃ Stars -->
+        <div class="stars-grid" id="starsList">
+            <div class="star-item selected" onclick="selectStar(this, 50, 0.98)">
+                <div class="star-count">50 🌟</div>
+                <div class="star-price">$0.98</div>
+            </div>
+            <div class="star-item" onclick="selectStar(this, 75, 1.47)">
+                <div class="star-count">75 🌟</div>
+                <div class="star-price">$1.47</div>
+            </div>
+            <div class="star-item" onclick="selectStar(this, 100, 1.96)">
+                <div class="star-count">100 🌟</div>
+                <div class="star-price">$1.96</div>
+            </div>
+            <div class="star-item" onclick="selectStar(this, 150, 2.94)">
+                <div class="star-count">150 🌟</div>
+                <div class="star-price">$2.94</div>
+            </div>
+            <div class="star-item" onclick="selectStar(this, 250, 4.90)">
+                <div class="star-count">250 🌟</div>
+                <div class="star-price">$4.90</div>
+            </div>
+            <div class="star-item" onclick="selectStar(this, 350, 6.86)">
+                <div class="star-count">350 🌟</div>
+                <div class="star-price">$6.86</div>
+            </div>
+            <div class="star-item" onclick="selectStar(this, 500, 9.80)">
+                <div class="star-count">500 🌟</div>
+                <div class="star-price">$9.80</div>
+            </div>
         </div>
 
         <div class="footer">
@@ -191,9 +271,17 @@
         let tg = window.Telegram.WebApp;
         tg.expand();
 
-        function selectService(element) {
-            document.querySelectorAll('.shop-btn').forEach(btn => btn.classList.remove('active'));
-            element.classList.add('active');
+        function switchTab(type) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            if (tg.HapticFeedback) {
+                tg.HapticFeedback.impactOccurred('light');
+            }
+        }
+
+        function selectStar(element, count, price) {
+            document.querySelectorAll('.star-item').forEach(item => item.classList.remove('selected'));
+            element.classList.add('selected');
             if (tg.HapticFeedback) {
                 tg.HapticFeedback.impactOccurred('medium');
             }
