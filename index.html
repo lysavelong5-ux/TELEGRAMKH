@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Longzz SMM Digital Shop</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 15px;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .header-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #222;
+            margin-bottom: 4px;
+        }
+        .header-sub {
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .input-group label {
+            font-size: 11px;
+            font-weight: bold;
+            color: #555;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .input-box {
+            background: #eef2f7;
+            border: 1px solid #d1d9e0;
+            border-radius: 12px;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .input-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 14px;
+            width: 100%;
+            color: #333;
+        }
+        .section-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            margin: 20px 0 10px 0;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .shop-btn {
+            background: #eef2f7;
+            border: 1px solid #d1d9e0;
+            border-radius: 12px;
+            padding: 14px 10px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .shop-btn:hover {
+            background: #dfe5ec;
+        }
+        .shop-btn.active {
+            background: #2481cc;
+            color: white;
+            border-color: #2481cc;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 11px;
+            color: #888;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer span {
+            font-weight: bold;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header-title">TELEGRAM PREMIUM</div>
+        <div class="header-sub">Longzz smm digital service</div>
+
+        <div class="input-group">
+            <label>Telegram Username</label>
+            <div class="input-box">
+                <input type="text" id="username" placeholder="Example : @Longzzsmmdigital">
+                <span>✅</span>
+            </div>
+        </div>
+
+        <div class="section-title">⚙️ PREMIUM SERVICE SHOP</div>
+        
+        <div class="btn-grid">
+            <button class="shop-btn" onclick="selectService(this, 'star')">
+                TELEGRAM STAR 🌟
+            </button>
+            <button class="shop-btn active" onclick="selectService(this, 'premium')">
+                TELEGRAM PREMIUM 🦁
+            </button>
+        </div>
+
+        <div class="footer">
+            <span>KHMER TVER BAN</span>
+            <span>ESP : SEAV LONG GROUP ©2026</span>
+        </div>
+    </div>
+
+    <script>
+        let tg = window.Telegram.WebApp;
+        tg.expand(); // ពង្រីក Mini App ឱ្យពេញអេក្រង់
+
+        function selectService(element, type) {
+            document.querySelectorAll('.shop-btn').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+            
+            // អាចផ្ញើទិន្នន័យទៅ Telegram Bot វិញនៅទីនេះបើត្រូវការ
+            HapticFeedback();
+        }
+
+        function HapticFeedback() {
+            if (tg.HapticFeedback) {
+                tg.HapticFeedback.impactOccurred('medium');
+            }
+        }
+    </script>
+</body>
+</html>
