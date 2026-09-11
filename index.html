@@ -6,72 +6,101 @@
     <title>Longzz SMM Digital Shop</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f6f9;
+            background: linear-gradient(135deg, #0f172a, #1e1b4b, #312e81);
+            color: #ffffff;
             margin: 0;
-            padding: 15px;
-            color: #333;
+            padding: 12px;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
+            min-height: 100vh;
         }
         .container {
             width: 100%;
-            max-width: 400px;
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            max-width: 420px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
             padding: 20px;
-            box-sizing: border-box;
+        }
+        .header-box {
             text-align: center;
+            margin-bottom: 20px;
         }
         .header-title {
             font-size: 20px;
-            font-weight: bold;
-            color: #222;
-            margin-bottom: 4px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #60a5fa, #c084fc, #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         .header-sub {
-            font-size: 12px;
-            color: #777;
-            margin-bottom: 20px;
+            font-size: 11px;
+            color: #94a3b8;
+            margin-top: 4px;
         }
         .input-group {
-            text-align: left;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
         .input-group label {
-            font-size: 11px;
-            font-weight: bold;
-            color: #555;
+            font-size: 10px;
+            font-weight: 700;
+            color: #cbd5e1;
             text-transform: uppercase;
             display: block;
             margin-bottom: 6px;
+            letter-spacing: 0.5px;
         }
         .input-box {
-            background: #eef2f7;
-            border: 1px solid #d1d9e0;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 12px;
-            padding: 12px 15px;
+            padding: 10px 14px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
         }
         .input-box input {
             border: none;
             background: transparent;
             outline: none;
-            font-size: 14px;
+            font-size: 13px;
             width: 100%;
-            color: #333;
+            color: #ffffff;
+        }
+        .input-box input::placeholder {
+            color: #64748b;
+        }
+        .blue-tick {
+            width: 20px;
+            height: 20px;
+            background: #3b82f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 11px;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.6);
+            flex-shrink: 0;
+            margin-left: 8px;
         }
         .section-title {
-            font-size: 14px;
-            font-weight: bold;
-            color: #333;
-            margin: 20px 0 10px 0;
-            text-align: left;
+            font-size: 12px;
+            font-weight: 700;
+            color: #cbd5e1;
+            margin: 18px 0 10px 0;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -82,66 +111,73 @@
             gap: 10px;
         }
         .shop-btn {
-            background: #eef2f7;
-            border: 1px solid #d1d9e0;
-            border-radius: 12px;
-            padding: 14px 10px;
-            font-size: 13px;
-            font-weight: 600;
-            color: #333;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            padding: 14px 8px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #ffffff;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             gap: 6px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
         .shop-btn:hover {
-            background: #dfe5ec;
+            transform: translateY(-2px);
+            border-color: rgba(96, 165, 250, 0.5);
+            box-shadow: 0 6px 15px rgba(59, 130, 246, 0.3);
         }
         .shop-btn.active {
-            background: #2481cc;
-            color: white;
-            border-color: #2481cc;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            border-color: #60a5fa;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
         }
         .footer {
-            margin-top: 30px;
-            font-size: 11px;
-            color: #888;
-            border-top: 1px solid #eee;
-            padding-top: 15px;
+            margin-top: 24px;
+            font-size: 10px;
+            color: #64748b;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            letter-spacing: 0.5px;
         }
         .footer span {
-            font-weight: bold;
-            color: #444;
+            font-weight: 700;
+            color: #94a3b8;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div class="header-title">TELEGRAM PREMIUM</div>
-        <div class="header-sub">Longzz smm digital service</div>
+        <div class="header-box">
+            <div class="header-title">TELEGRAM PREMIUM</div>
+            <div class="header-sub">Longzz smm digital service</div>
+        </div>
 
         <div class="input-group">
             <label>Telegram Username</label>
             <div class="input-box">
                 <input type="text" id="username" placeholder="Example : @Longzzsmmdigital">
-                <span>✅</span>
+                <div class="blue-tick">✓</div>
             </div>
         </div>
 
         <div class="section-title">⚙️ PREMIUM SERVICE SHOP</div>
         
         <div class="btn-grid">
-            <button class="shop-btn" onclick="selectService(this, 'star')">
-                TELEGRAM STAR 🌟
+            <button class="shop-btn" onclick="selectService(this)">
+                <span>TELEGRAM STAR</span> 🌟
             </button>
-            <button class="shop-btn active" onclick="selectService(this, 'premium')">
-                TELEGRAM PREMIUM 🦁
+            <button class="shop-btn active" onclick="selectService(this)">
+                <span>TELEGRAM PREMIUM</span> 🦁
             </button>
         </div>
 
@@ -153,17 +189,11 @@
 
     <script>
         let tg = window.Telegram.WebApp;
-        tg.expand(); // ពង្រីក Mini App ឱ្យពេញអេក្រង់
+        tg.expand();
 
-        function selectService(element, type) {
+        function selectService(element) {
             document.querySelectorAll('.shop-btn').forEach(btn => btn.classList.remove('active'));
             element.classList.add('active');
-            
-            // អាចផ្ញើទិន្នន័យទៅ Telegram Bot វិញនៅទីនេះបើត្រូវការ
-            HapticFeedback();
-        }
-
-        function HapticFeedback() {
             if (tg.HapticFeedback) {
                 tg.HapticFeedback.impactOccurred('medium');
             }
