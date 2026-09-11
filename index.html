@@ -118,14 +118,12 @@
             flex-shrink: 0;
             margin-left: 8px;
         }
-        /* កន្លែងបង្ហាញឈ្មោះពិតពណ៌ខៀវតាមការចង់បាន */
         .real-name-display {
             font-size: 11px;
             font-weight: 700;
-            color: #38bdf8;
+            color: #cbd5e1;
             margin-bottom: 14px;
             text-align: left;
-            min-height: 16px;
         }
         .instruction-text {
             font-size: 11px;
@@ -269,13 +267,15 @@
         <div class="input-group">
             <label>Telegram Username</label>
             <div class="input-box">
-                <input type="text" id="username" placeholder="Example : @Longzzsmmdigital" oninput="checkUsername(this)">
+                <input type="text" id="username" placeholder="Example : @Longzzsmmdigital">
                 <div class="blue-tick">✓</div>
             </div>
         </div>
 
-        <!-- កន្លែងលោតឈ្មោះពិតពណ៌ខៀវនៅចំកន្លែងដែលបងចង់បាន -->
-        <div class="real-name-display" id="realNameDisplay">👤 Telegram: <span>(កំពុងរង់ចាំ...)</span></div>
+        <!-- បង្ហាញឈ្មោះ Telegram ពិតប្រាកដជាអក្សរពណ៌ខៀវ -->
+        <div class="real-name-display" id="realNameDisplay">
+            👤 Telegram Account: <span id="tgRealName" style="color: #38bdf8; font-weight: 800;">กำลังโหลด...</span>
+        </div>
 
         <div class="instruction-text">👉 សូមជ្រើសរើសកញ្ចប់ខាងក្រោម៖</div>
 
@@ -349,35 +349,31 @@
         let tg = window.Telegram.WebApp;
         tg.expand();
 
-        // ទាញយក Username របស់ User មកដាក់ក្នុង ô ស្រាប់ពេលបើក Mini App
+        // ទាញយកឈ្មោះ Telegram ពិតៗរបស់អ្នកប្រើប្រាស់ពេលបើក Mini App
         window.onload = function() {
+            let usernameField = document.getElementById('username');
+            let tgRealNameSpan = document.getElementById('tgRealName');
+
             if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
                 let user = tg.initDataUnsafe.user;
-                let usernameField = document.getElementById('username');
-                let realNameDisplay = document.getElementById('realNameDisplay');
                 
+                // បំពេញ Username ក្នុង ô Input ស្វ័យប្រវត្តិ
                 if (user.username) {
                     usernameField.value = "@" + user.username;
                 } else if (user.first_name) {
                     usernameField.value = user.first_name;
                 }
-                
-                // បង្ហាញឈ្មោះពិតជាពណ៌ខៀវ
-                let fullName = user.first_name + (user.last_name ? " " + user.last_name : "");
-                realNameDisplay.innerHTML = `👤 Telegram: <span style="color: #60a5fa;">${fullName} (@${user.username || 'N/A'})</span>`;
+
+                // បង្ហាញឈ្មោះពិតប្រាកដ (Real Name)
+                let realName = user.first_name + (user.last_name ? " " + user.last_name : "");
+                let handle = user.username ? " (@" + user.username + ")" : "";
+                tgRealNameSpan.innerText = realName + handle;
+            } else {
+                // กรณีเปิดทดสอบใน Browser ธรรมดาที่ไม่ใช่ Telegram
+                tgRealNameSpan.innerText = "Longzzsmmdigitall (Browser Mode)";
+                usernameField.value = "@Longzzsmmdigitall";
             }
         };
-
-        // មុខងារអាប់ដេតឈ្មោះពេលគេវាយបញ្ចូលផ្ទាល់
-        function checkUsername(input) {
-            let realNameDisplay = document.getElementById('realNameDisplay');
-            let val = input.value.trim();
-            if (val.length > 0) {
-                realNameDisplay.innerHTML = `👤 Telegram: <span style="color: #60a5fa;">ស្កេនឃើញ اکោន: ${val}</span>`;
-            } else {
-                realNameDisplay.innerHTML = `👤 Telegram: <span style="color: #94a3b8;">(សូមបញ្ចូល Username របស់អ្នក)</span>`;
-            }
-        }
 
         function switchTab(type) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
