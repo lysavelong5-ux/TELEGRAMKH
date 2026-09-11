@@ -72,7 +72,7 @@
             100% { transform: translate(-100%, 0); }
         }
         .input-group {
-            margin-bottom: 14px;
+            margin-bottom: 6px;
         }
         .input-group label {
             font-size: 10px;
@@ -118,21 +118,21 @@
             flex-shrink: 0;
             margin-left: 8px;
         }
-        .instruction-text {
+        /* កន្លែងបង្ហាញឈ្មោះពិតពណ៌ខៀវតាមការចង់បាន */
+        .real-name-display {
             font-size: 11px;
             font-weight: 700;
             color: #38bdf8;
             margin-bottom: 14px;
             text-align: left;
+            min-height: 16px;
         }
-        .section-title {
-            font-size: 12px;
+        .instruction-text {
+            font-size: 11px;
             font-weight: 700;
             color: #cbd5e1;
-            margin: 12px 0 8px 0;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            margin-bottom: 10px;
+            text-align: left;
         }
         .main-tabs {
             display: grid;
@@ -269,12 +269,14 @@
         <div class="input-group">
             <label>Telegram Username</label>
             <div class="input-box">
-                <input type="text" id="username" placeholder="Example : @Longzzsmmdigital">
+                <input type="text" id="username" placeholder="Example : @Longzzsmmdigital" oninput="checkUsername(this)">
                 <div class="blue-tick">✓</div>
             </div>
         </div>
 
-        <!-- រង្វង់ទី 1: អក្សរបញ្ជាក់នៅពីក្រោម Blue Tick -->
+        <!-- កន្លែងលោតឈ្មោះពិតពណ៌ខៀវនៅចំកន្លែងដែលបងចង់បាន -->
+        <div class="real-name-display" id="realNameDisplay">👤 Telegram: <span>(កំពុងរង់ចាំ...)</span></div>
+
         <div class="instruction-text">👉 សូមជ្រើសរើសកញ្ចប់ខាងក្រោម៖</div>
 
         <div class="main-tabs">
@@ -282,7 +284,7 @@
             <div class="tab-btn" onclick="switchTab('premium')">TELEGRAM PREMIUM 🦁</div>
         </div>
 
-        <!-- កញ្ចប់ Telegram Star (ដាច់ដោយឡែក) -->
+        <!-- កញ្ចប់ Telegram Star -->
         <div id="starsContent" class="service-content active">
             <div class="stars-grid">
                 <div class="star-item selected" onclick="selectItem(this)">
@@ -316,7 +318,7 @@
             </div>
         </div>
 
-        <!-- កញ្ចប់ Telegram Premium (ដាច់ដោយឡែក) -->
+        <!-- កញ្ចប់ Telegram Premium -->
         <div id="premiumContent" class="service-content">
             <div class="premium-packages">
                 <div class="prem-item selected" onclick="selectItem(this)">
@@ -334,7 +336,7 @@
             </div>
         </div>
 
-        <!-- រង្វង់ទី 2: ប៊ូតុង ទិញឥឡូវនេះ! -->
+        <!-- ប៊ូតុង ទិញឥឡូវនេះ! -->
         <button class="buy-btn" onclick="checkout()">🛒 ទិញឥឡូវនេះ!</button>
 
         <div class="footer">
@@ -346,6 +348,36 @@
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
+
+        // ទាញយក Username របស់ User មកដាក់ក្នុង ô ស្រាប់ពេលបើក Mini App
+        window.onload = function() {
+            if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+                let user = tg.initDataUnsafe.user;
+                let usernameField = document.getElementById('username');
+                let realNameDisplay = document.getElementById('realNameDisplay');
+                
+                if (user.username) {
+                    usernameField.value = "@" + user.username;
+                } else if (user.first_name) {
+                    usernameField.value = user.first_name;
+                }
+                
+                // បង្ហាញឈ្មោះពិតជាពណ៌ខៀវ
+                let fullName = user.first_name + (user.last_name ? " " + user.last_name : "");
+                realNameDisplay.innerHTML = `👤 Telegram: <span style="color: #60a5fa;">${fullName} (@${user.username || 'N/A'})</span>`;
+            }
+        };
+
+        // មុខងារអាប់ដេតឈ្មោះពេលគេវាយបញ្ចូលផ្ទាល់
+        function checkUsername(input) {
+            let realNameDisplay = document.getElementById('realNameDisplay');
+            let val = input.value.trim();
+            if (val.length > 0) {
+                realNameDisplay.innerHTML = `👤 Telegram: <span style="color: #60a5fa;">ស្កេនឃើញ اکោន: ${val}</span>`;
+            } else {
+                realNameDisplay.innerHTML = `👤 Telegram: <span style="color: #94a3b8;">(សូមបញ្ចូល Username របស់អ្នក)</span>`;
+            }
+        }
 
         function switchTab(type) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -365,7 +397,6 @@
         }
 
         function selectItem(element) {
-            // ដក selection ចេញពីក្រុមជាមួយគ្នា
             let parent = element.parentElement;
             parent.querySelectorAll('.star-item, .prem-item').forEach(item => item.classList.remove('selected'));
             element.classList.add('selected');
