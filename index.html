@@ -6,9 +6,7 @@
     <title>Longzz SMM Digital Shop</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #0f172a, #1e1b4b, #312e81);
@@ -31,10 +29,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
             padding: 20px;
         }
-        .header-box {
-            text-align: center;
-            margin-bottom: 10px;
-        }
+        .header-box { text-align: center; margin-bottom: 10px; }
         .header-title {
             font-size: 20px;
             font-weight: 800;
@@ -44,11 +39,7 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        .header-sub {
-            font-size: 11px;
-            color: #94a3b8;
-            margin-top: 4px;
-        }
+        .header-sub { font-size: 11px; color: #94a3b8; margin-top: 4px; }
         .marquee-container {
             width: 100%;
             overflow: hidden;
@@ -71,9 +62,7 @@
             0% { transform: translate(0, 0); }
             100% { transform: translate(-100%, 0); }
         }
-        .input-group {
-            margin-bottom: 12px;
-        }
+        .input-group { margin-bottom: 12px; }
         .input-group label {
             font-size: 10px;
             font-weight: 700;
@@ -81,7 +70,6 @@
             text-transform: uppercase;
             display: block;
             margin-bottom: 6px;
-            letter-spacing: 0.5px;
         }
         .input-box {
             background: rgba(15, 23, 42, 0.6);
@@ -91,7 +79,6 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
         }
         .input-box input {
             border: none;
@@ -101,160 +88,57 @@
             width: 100%;
             color: #ffffff;
         }
-        .input-box input::placeholder {
-            color: #64748b;
-        }
+        .input-box input::placeholder { color: #64748b; }
         .blue-tick {
-            width: 20px;
-            height: 20px;
-            background: #3b82f6;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 11px;
+            width: 20px; height: 20px;
+            background: #3b82f6; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 11px;
             box-shadow: 0 0 10px rgba(59, 130, 246, 0.6);
-            flex-shrink: 0;
-            margin-left: 8px;
+            flex-shrink: 0; margin-left: 8px;
         }
-        .instruction-text {
-            font-size: 11px;
-            font-weight: 700;
-            color: #cbd5e1;
-            margin-bottom: 10px;
-            text-align: left;
-        }
-        .main-tabs {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 12px;
-        }
+        .instruction-text { font-size: 11px; font-weight: 700; color: #cbd5e1; margin-bottom: 10px; text-align: left; }
+        .main-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
         .tab-btn {
             background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 10px;
-            font-size: 11px;
-            font-weight: 700;
-            color: #ffffff;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.3s ease;
+            border-radius: 12px; padding: 10px; font-size: 11px; font-weight: 700;
+            color: #ffffff; cursor: pointer; text-align: center; transition: all 0.3s ease;
         }
-        .tab-btn.active {
-            background: linear-gradient(135deg, #2563eb, #7c3aed);
-            border-color: #60a5fa;
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
-        }
-        /* កន្លែងសម្រាប់លាក់/បង្ហាញកញ្ចប់សេវាកម្ម */
-        .service-section {
-            display: none;
-        }
-        .service-section.active {
-            display: block;
-        }
-        .service-content {
-            display: none;
-        }
-        .service-content.active {
-            display: block;
-        }
-        .stars-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            max-height: 160px;
-            overflow-y: auto;
-            padding-right: 2px;
-        }
-        .star-item {
+        .tab-btn.active { background: linear-gradient(135deg, #2563eb, #7c3aed); border-color: #60a5fa; box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
+        .service-section { display: none; }
+        .service-section.active { display: block; }
+        .service-content { display: none; }
+        .service-content.active { display: block; }
+        .stars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; max-height: 160px; overflow-y: auto; }
+        .star-item, .prem-item {
             background: rgba(15, 23, 42, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 8px 4px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
+            border-radius: 10px; padding: 8px 4px; text-align: center; cursor: pointer; transition: all 0.2s ease;
         }
-        .star-item:hover, .star-item.selected {
+        .star-item:hover, .star-item.selected, .prem-item:hover, .prem-item.selected {
             background: rgba(59, 130, 246, 0.2);
             border-color: #3b82f6;
             transform: translateY(-2px);
         }
-        .star-count {
-            font-size: 11px;
-            font-weight: 700;
-            color: #f8fafc;
-        }
-        .star-price {
-            font-size: 10px;
-            color: #38bdf8;
-            margin-top: 2px;
-            font-weight: 600;
-        }
-        .premium-packages {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            max-height: 160px;
-            overflow-y: auto;
-            padding-right: 2px;
-        }
-        .prem-item {
-            background: rgba(15, 23, 42, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 10px 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .prem-item:hover, .prem-item.selected {
-            background: rgba(59, 130, 246, 0.2);
-            border-color: #3b82f6;
-        }
+        .star-count { font-size: 11px; font-weight: 700; color: #f8fafc; }
+        .star-price { font-size: 10px; color: #38bdf8; margin-top: 2px; font-weight: 600; }
+        .premium-packages { display: flex; flex-direction: column; gap: 8px; max-height: 160px; overflow-y: auto; }
+        .prem-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; }
         .buy-btn {
             width: 100%;
             background: linear-gradient(135deg, #10b981, #059669);
-            border: none;
-            border-radius: 12px;
-            padding: 12px;
-            color: white;
-            font-size: 13px;
-            font-weight: 800;
-            cursor: pointer;
-            margin-top: 16px;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
-            transition: all 0.2s ease;
-            text-transform: uppercase;
-            display: none; /* លាក់ប៊ូតុងទិញរហូតដល់មានការជ្រើសរើសសេវាកម្ម */
+            border: none; border-radius: 12px; padding: 12px; color: white;
+            font-size: 13px; font-weight: 800; cursor: pointer; margin-top: 16px;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4); text-transform: uppercase; display: none;
         }
-        .buy-btn.active {
-            display: block;
-        }
-        .buy-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
-        }
+        .buy-btn.active { display: block; }
         .footer {
-            margin-top: 14px;
-            font-size: 10px;
-            color: #64748b;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            padding-top: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            letter-spacing: 0.5px;
+            margin-top: 14px; font-size: 10px; color: #64748b;
+            border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 10px;
+            display: flex; justify-content: space-between; align-items: center;
         }
-        .footer span {
-            font-weight: 700;
-            color: #94a3b8;
-        }
+        .footer span { font-weight: 700; color: #94a3b8; }
     </style>
 </head>
 <body>
@@ -279,7 +163,6 @@
             </div>
         </div>
 
-        <!-- ផ្នែកប៊ូតុងជ្រើសរើសសេវាកម្ម (ពេលចូលមកដំបូងបង្ហាញត្រឹមនេះ) -->
         <div class="instruction-text">👉 សូមជ្រើសរើសប្រភេទសេវាកម្មខាងក្រោម៖</div>
 
         <div class="main-tabs">
@@ -287,66 +170,29 @@
             <div class="tab-btn" onclick="revealService('premium')">TELEGRAM PREMIUM 🦁</div>
         </div>
 
-        <!-- ផ្នែកកញ្ចប់សេវាកម្មដែលនឹងលោតបង្ហាញពេលគេចុច -->
         <div id="serviceSection" class="service-section">
-            <!-- កញ្ចប់ Telegram Star -->
             <div id="starsContent" class="service-content">
                 <div class="stars-grid">
-                    <div class="star-item" onclick="selectItem(this)">
-                        <div class="star-count">50 🌟</div>
-                        <div class="star-price">$0.98</div>
-                    </div>
-                    <div class="star-item" onclick="selectItem(this)">
-                        <div class="star-count">75 🌟</div>
-                        <div class="star-price">$1.47</div>
-                    </div>
-                    <div class="star-item" onclick="selectItem(this)">
-                        <div class="star-count">100 🌟</div>
-                        <div class="star-price">$1.96</div>
-                    </div>
-                    <div class="star-item" onclick="selectItem(this)">
-                        <div class="star-count">150 🌟</div>
-                        <div class="star-price">$2.94</div>
-                    </div>
-                    <div class="star-item" onclick="selectItem(this)">
-                        <div class="star-count">250 🌟</div>
-                        <div class="star-price">$4.90</div>
-                    </div>
-                    <div class="star-item" onclick="selectItem(this)">
-                        <div class="star-count">350 🌟</div>
-                        <div class="star-price">$6.86</div>
-                    </div>
-                    <div class="star-item" onclick="selectItem(this)">
-                        <div class="star-count">500 🌟</div>
-                        <div class="star-price">$9.80</div>
-                    </div>
+                    <div class="star-item selected" onclick="selectItem(this)" data-name="50 Telegram Stars 🌟" data-price="$0.98"><div class="star-count">50 🌟</div><div class="star-price">$0.98</div></div>
+                    <div class="star-item" onclick="selectItem(this)" data-name="75 Telegram Stars 🌟" data-price="$1.47"><div class="star-count">75 🌟</div><div class="star-price">$1.47</div></div>
+                    <div class="star-item" onclick="selectItem(this)" data-name="100 Telegram Stars 🌟" data-price="$1.96"><div class="star-count">100 🌟</div><div class="star-price">$1.96</div></div>
+                    <div class="star-item" onclick="selectItem(this)" data-name="150 Telegram Stars 🌟" data-price="$2.94"><div class="star-count">150 🌟</div><div class="star-price">$2.94</div></div>
+                    <div class="star-item" onclick="selectItem(this)" data-name="250 Telegram Stars 🌟" data-price="$4.90"><div class="star-count">250 🌟</div><div class="star-price">$4.90</div></div>
+                    <div class="star-item" onclick="selectItem(this)" data-name="350 Telegram Stars 🌟" data-price="$6.86"><div class="star-count">350 🌟</div><div class="star-price">$6.86</div></div>
+                    <div class="star-item" onclick="selectItem(this)" data-name="500 Telegram Stars 🌟" data-price="$9.80"><div class="star-count">500 🌟</div><div class="star-price">$9.80</div></div>
                 </div>
             </div>
 
-            <!-- កញ្ចប់ Telegram Premium -->
             <div id="premiumContent" class="service-content">
                 <div class="premium-packages">
-                    <div class="prem-item" onclick="selectItem(this)">
-                        <span>1 Month (Login) 🦁</span>
-                        <span style="color: #38bdf8; font-weight: 700;">$4.50</span>
-                    </div>
-                    <div class="prem-item" onclick="selectItem(this)">
-                        <span>3 Months (Login) 🦁</span>
-                        <span style="color: #38bdf8; font-weight: 700;">$14.00</span>
-                    </div>
-                    <div class="prem-item" onclick="selectItem(this)">
-                        <span>6 Months (Login) 🦁</span>
-                        <span style="color: #38bdf8; font-weight: 700;">$18.00</span>
-                    </div>
-                    <div class="prem-item" onclick="selectItem(this)">
-                        <span>12 Months / 1 Year (Login) 🦁</span>
-                        <span style="color: #38bdf8; font-weight: 700;">$32.00</span>
-                    </div>
+                    <div class="prem-item selected" onclick="selectItem(this)" data-name="1 Month Premium (Login)" data-price="$4.50"><span>1 Month (Login) 🦁</span><span style="color: #38bdf8; font-weight: 700;">$4.50</span></div>
+                    <div class="prem-item" onclick="selectItem(this)" data-name="3 Months Premium (No Login)" data-price="$14.00"><span>3 Months (No Login) 🦁</span><span style="color: #38bdf8; font-weight: 700;">$14.00</span></div>
+                    <div class="prem-item" onclick="selectItem(this)" data-name="6 Months Premium (No Login)" data-price="$18.00"><span>6 Months (No Login) 🦁</span><span style="color: #38bdf8; font-weight: 700;">$18.00</span></div>
+                    <div class="prem-item" onclick="selectItem(this)" data-name="12 Months Premium (No Login)" data-price="$32.00"><span>12 Months (No Login) 🦁</span><span style="color: #38bdf8; font-weight: 700;">$32.00</span></div>
                 </div>
             </div>
         </div>
 
-        <!-- ប៊ូតុង ទិញឥឡូវនេះ! (លោតមកជាមួយពេលចុចជ្រើសរើសសេវាកម្ម) -->
         <button id="buyBtn" class="buy-btn" onclick="checkout()">🛒 ទិញឥឡូវនេះ!</button>
 
         <div class="footer">
@@ -359,6 +205,7 @@
         let tg = window.Telegram.WebApp;
         tg.expand();
 
+        // Auto fill username if opened via Telegram
         window.onload = function() {
             if (tg.initDataUnsafe && tg.initDataUnsafe.user && tg.initDataUnsafe.user.username) {
                 document.getElementById('username').value = "@" + tg.initDataUnsafe.user.username;
@@ -369,7 +216,6 @@
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.service-content').forEach(content => content.classList.remove('active'));
             
-            // បង្ហាញផ្នែកកញ្ចប់សេវាកម្ម និងប៊ូតុងទិញ
             document.getElementById('serviceSection').classList.add('active');
             document.getElementById('buyBtn').classList.add('active');
 
@@ -381,31 +227,43 @@
                 document.getElementById('premiumContent').classList.add('active');
             }
 
-            if (tg.HapticFeedback) {
-                tg.HapticFeedback.impactOccurred('medium');
-            }
+            if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
         }
 
         function selectItem(element) {
             let parent = element.parentElement;
             parent.querySelectorAll('.star-item, .prem-item').forEach(item => item.classList.remove('selected'));
             element.classList.add('selected');
-
-            if (tg.HapticFeedback) {
-                tg.HapticFeedback.impactOccurred('light');
-            }
+            if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
         }
 
         function checkout() {
-            let username = document.getElementById('username').value;
+            let username = document.getElementById('username').value.trim();
             if(!username) {
                 alert("សូមបញ្ចូល Telegram Username របស់អ្នកសិន!");
                 return;
             }
-            if (tg.HapticFeedback) {
-                tg.HapticFeedback.notificationOccurred('success');
+
+            let selectedItem = document.querySelector('.star-item.selected, .prem-item.selected');
+            if(!selectedItem) {
+                alert("សូមជ្រើសរើសកញ្ចប់សេវាកម្មសិន!");
+                return;
             }
-            alert("បានបញ្ជាទិញជោគជ័យសម្រាប់ " + username + "! សូមរង់ចាំពី ៥ ទៅ ១៥នាទី។");
+
+            let serviceName = selectedItem.getAttribute('data-name');
+            let price = selectedItem.getAttribute('data-price');
+
+            let data = JSON.stringify({
+                username: username,
+                service: serviceName,
+                price: price
+            });
+
+            if (tg.sendData) {
+                tg.sendData(data);
+            } else {
+                alert("បានបញ្ជាទិញជោគជ័យសម្រាប់ " + username + " (" + serviceName + " - " + price + ")!");
+            }
         }
     </script>
 </body>
